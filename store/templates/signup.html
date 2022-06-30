@@ -1,0 +1,40 @@
+{% extends 'base.html' %} {% block content %}
+<div class="container">
+    <div class="p-4 m-4">
+        <div class="col-lg-5 mx-auto border rounded pt-4">
+            <h3 class="alert alert-info border rounded">Create An Account</h3>
+            <form action="/signup" method="post">
+                {% csrf_token %}
+                {% if error_message %}
+                <div class="alert alert-danger" role="alert">
+                  {{error_message}}
+                </div>
+                {% endif %}
+                <div class="form-group">
+                    <div class="form-group">
+                        <label for="">First Name</label>
+                        <input type="text" name="first_name" id="" class="form-control" placeholder="Joe" />
+                    </div>
+                    <div class="form-group">
+                        <label for="">Last Name</label>
+                        <input type="text" name="last_name" id="" class="form-control" placeholder="Trump" />
+                    </div>
+                    <label for="">Email Address</label>
+                    <input type="email" name="email" id="" class="form-control" placeholder="example@gmail.com" />
+                </div>
+                <div class="form-group">
+                    <label for="">Password</label>
+                    <input type="password" name="password" id="" class="form-control" placeholder="********" />
+                </div>
+                <div class="form-group">
+                    <label for="">Mobile Number</label>
+                    <input type="number"  name="mobile_number" id="" class="form-control" placeholder="********" />
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create an Acoount" class="btn btn-sm btn-info">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
