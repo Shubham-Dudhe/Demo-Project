@@ -16,7 +16,6 @@
                     <th>Quantity</th>
                     <th>Total</th>
                     <th>Status</th>
-                    <th>Payment</th>
                 </tr>
             </thead>
             <tbody>
@@ -34,23 +33,22 @@
                     {% else %}
                     <td><small class="badge badge-warning">Pending</small></td>
                     {% endif %}
-
-                    {% if order.status %}             
-                    <td><button type="button" class="btn btn-success">Successfully Placed</button></td>
-                    {% else %}
-                    <td><p class="lead">
-                        <a class="btn btn-warning" href="/payments" role="button">Make Payment</a>
-                      </p></td>
-                    {% endif %}
-
-                </tr>
-                {% endfor %}
+                </tr>              
+        {% endfor %}
             </tbody>
             
         </table>
-      
+        
     </div>
 
 </div>
-
+<div class="container">  
+    {% if order.status %}             
+        <button type="button" class="btn btn-success">Successfully Placed</button>
+        {% else %}
+        <p class="lead">
+            <a class="btn btn-warning float-right" href="/payment" role="button">Make Payment</a>
+          </p>
+        {% endif %}       
+        </div>
 {% endblock %}
