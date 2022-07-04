@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'store'
+    'store',
+    'django_bootstrap_icons'
 ]
 
 MIDDLEWARE = [
@@ -127,3 +128,6 @@ MEDIA_ROOT = BASE_DIR
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+RAZORPAY_API_KEY = 'rzp_test_gLGtEdNLbbLsq2'
+RAZORPAY_API_SECRET_KEY = 'mRFOcdaPiOx5hVU0B73TKhp7'

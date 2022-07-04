@@ -43,12 +43,3 @@ class Checkout(View):
             order.place_order()
         request.session['cart'] = {}
         return redirect('orders')
-
-'''
-def get(self,request):
-        Checkout.return_url = request.GET.get('return_url')
-        product_list = list(request.session.get('cart').keys())
-        products = Product.get_product_by_id(product_list)
-        #print(products)
-        return render(request,'cart.html',{'products':products})
-'''

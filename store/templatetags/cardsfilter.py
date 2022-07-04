@@ -41,3 +41,10 @@ def order_total(orders):
     for order in orders:
         sum += order.price*order.quantity
     return sum
+
+@register.filter(name='coupon_discount')
+def coupon_discount(orders,coupon):
+    sum = 0
+    for order in orders:
+        sum += order.price*order.quantity
+    return sum

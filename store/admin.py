@@ -4,6 +4,7 @@ from .models import Category
 from .models import Customer
 from .models import Address
 from .models import Order
+from .models import Coupon
 
 # Register your models here.
 
@@ -31,6 +32,12 @@ admin.site.register(Address,AddressAdmin)
 
 
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ['product','customer','address','quantity','price','mobile_number','date','status']
+    list_display = ['id','product','customer','address','quantity','price','mobile_number','date','status']
 
 admin.site.register(Order,OrderAdmin)
+
+
+class CouponAdmin(admin.ModelAdmin):
+    list_display = ['coupon_code','is_expired','discount_price','minimum_amount']
+
+admin.site.register(Coupon,CouponAdmin)

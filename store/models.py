@@ -81,6 +81,9 @@ class Order(models.Model):
     mobile_number = models.CharField(max_length=50,blank=True, null=True)
     date = models.DateField(default=datetime.datetime.today)
     status = models.BooleanField(default=False)
+    razorpay_order_id = models.CharField(max_length=500,null=True,blank=True)
+    razorpay_payment_id = models.CharField(max_length=500,null=True,blank=True)
+    razorpay_payment_signature = models.CharField(max_length=500,null=True,blank=True)
     
 
     def place_order(self):
@@ -89,3 +92,23 @@ class Order(models.Model):
     @staticmethod
     def get_orders_by_customer_id(customer_id):
         return Order.objects.filter(customer=customer_id).order_by('-date')
+
+
+class Coupon(models.Model):
+    coupon_code = models.CharField(max_length=50)
+    is_expired = models.BooleanField(default=False)
+    is_applied = models.BooleanField(default=False)
+    discount_price = models.IntegerField(default=100)
+    minimum_amount = models.IntegerField(default=500)
+
+    def __str__(self):
+        return f"{self.coupon_code}"
+
+
+    @staticmethod
+    def modify_order_total(coupon,orders):
+        sum = 0
+        for order in orders:
+            sum += order.price*order.quantity
+        final_price = sum - coupon
+        return final_price

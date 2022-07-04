@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load bootstrap_icons %}
 {% load cardsfilter %}
 {% load custom %}
 {% block content %}
@@ -19,6 +20,7 @@
                 </tr>
             </thead>
             <tbody>
+  
                 {% for order in orders %}
                 <tr>                    
                     <td scope="row">{{forloop.counter}}</td>
@@ -29,26 +31,68 @@
                     <td>{{order.quantity}}</td>                    
                     <td>{{order.price|multiply:order.quantity|currency}}</td>
                     {% if order.status %}             
-                    <td><small class="badge badge-success">Completed</small></td>
+                    <td><small class="badge badge-success">Processing</small></td>
                     {% else %}
                     <td><small class="badge badge-warning">Pending</small></td>
                     {% endif %}
                 </tr>              
         {% endfor %}
+       
             </tbody>
             
         </table>
         
     </div>
+    <div>
+      
+        <div class="card text-center float-md-left" style="width: 18rem;">
+            <div class="card-body">
+              <form action="" method="post">
+                {% csrf_token %}
+                {% if error_message %}
+                <div class="alert alert-danger" role="alert">
+                  {{error_message}}
+                </div>
+                {% endif %}
+                <div class="form-group ">
+                    <label>Have Coupon ?</label>
+                    <div class="input-group ">
+                    <input type="text" name="coupon" class="form-control" placeholder="Coupon" aria-label="" aria-describedby="basic-addon1">
+                    <span class="input-group-append">
+                        <button type="submit" class="btn btn-primary">Apply</button>
+                    </span>
+                </div>
+                {% if coupon_obj.coupon_code %}
+                <a href="/orders?id={{coupon_obj.id}}" class="btn btn-success">{{coupon_obj.coupon_code}}{% bs_icon 'x' %}</a>
+                {% endif %}
+            </div>
+            </form>
+            </div>
+          </div>
 
+</div>
 </div>
 <div class="container">  
     {% if order.status %}             
-        <button type="button" class="btn btn-success">Successfully Placed</button>
+        <button type="button" class="btn btn-success float-md-right">Successfully Placed</button>
         {% else %}
-        <p class="lead">
-            <a class="btn btn-warning float-right" href="/payment" role="button">Make Payment</a>
-          </p>
+        <div class="card float-md-right" style="width: 18rem;">     
+            <div class="card-body">
+              <h5 class="card-title">Order Total</h5>
+              {% if discounted_price %}
+               {% if message %}
+                <div class="alert alert-danger" role="alert">
+                  {{message}}
+                </div>
+                {% endif %}
+            <h3>{{discounted_price}}</h3>
+              <a class="btn btn-primary" href="/payment?price={{discounted_price}}">Make Payment</a>
+            {% else %}           
+            <h3>{{orders|order_total}}</h3> 
+            <a class="btn btn-primary" href="/payment?price={{orders|order_total}}">Make Payment</a>      
+            {% endif %} 
+            </div>
+          </div>
         {% endif %}       
         </div>
 {% endblock %}
