@@ -82,8 +82,7 @@ class Order(models.Model):
     date = models.DateField(default=datetime.datetime.today)
     status = models.BooleanField(default=False)
     razorpay_order_id = models.CharField(max_length=500,null=True,blank=True)
-    razorpay_payment_id = models.CharField(max_length=500,null=True,blank=True)
-    razorpay_payment_signature = models.CharField(max_length=500,null=True,blank=True)
+    cash_on_delivery = models.CharField(max_length=500,null=True,blank=True)
     
 
     def place_order(self):
