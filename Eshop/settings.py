@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'store',
-    'django_bootstrap_icons'
+    'django_bootstrap_icons',
 ]
 
 MIDDLEWARE = [
@@ -118,8 +118,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
-
-STATIC_URL = 'static/'
+STATICFILES_DIRS = ["static"]
 STATIC_URL = 'static/'
 MEDIA_URL = '/images/' #to confuse user about path
 MEDIA_ROOT = BASE_DIR
@@ -131,3 +130,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 RAZORPAY_API_KEY = 'rzp_test_gLGtEdNLbbLsq2'
 RAZORPAY_API_SECRET_KEY = 'mRFOcdaPiOx5hVU0B73TKhp7'
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = True  
+EMAIL_HOST = 'smtp.gmail.com'  
+EMAIL_PORT = 587  
+EMAIL_HOST_USER = 'djangopython1947@gmail.com'  
+EMAIL_HOST_PASSWORD = 'aijihpqqhanigwxv'  

@@ -1,0 +1,57 @@
+{% load cardsfilter %}
+{% load custom %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+    Hey {{customer.first_name}}
+    <p>Thank you for your purchase,Your order will be shipped soon</p>
+    <p>We are ready to help you for future enquiries about your order</p>
+    <p>Your order details as follows</p>
+    <div class="container">
+            <table style="border:30px;">
+                <thead>
+                    <tr>
+                        <th>OrderId</th>
+                        <th>Image</th>
+                        <th>Product</th>
+                        <th>Order Date</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+    
+                    {% for order in orders %}
+                    <tr>
+                        <td scope="row">{{forloop.counter}}</td>
+                        <td><img style="height:80px ; width:80px;" src="{{order.product.image.url}}" class="rounded-circle "
+                                alt=""></td>
+                        <td>{{order.product.name}}</td>
+                        <td>{{order.date}}</td>
+                        <td>{{order.product.price|currency}}</td>
+                        <td>{{order.quantity}}</td>
+                        <td>{{order.price|multiply:order.quantity|currency}}</td>
+                        {% if order.status %}
+                        <td><small class="badge badge-success">Processing</small></td>
+                        {% else %}
+                        <td><small class="badge badge-warning">Pending</small></td>
+                        {% endif %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <p>Thank and regards</p>
+        <p>admin</p>
+    </div> 
+</body>
+</html>

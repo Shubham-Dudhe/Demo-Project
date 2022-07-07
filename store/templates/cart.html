@@ -23,6 +23,7 @@
                     <td><img style="height:80px ; width:80px;" src="{{product.image.url}}" class="rounded-circle "alt=""></td>
                     <td>{{product.name}}</td>
                     <td>{{product.price|currency}}</td>
+                    
                     <td>{{product|cart_quantity:request.session.cart}}</td>         
                     <td>{{product|price_total:request.session.cart|currency}}</td>             
                 </tr>
